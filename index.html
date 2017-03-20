@@ -68,6 +68,24 @@
 		<div id="up">
 		<form action="JavaScript:processUserLANG()">
 			<input type="text" id="outputUSERmochi">
+			<script>
+				function processUserLANG() {
+					const mong = document.getElementById("outputUSERmochi");
+					const sayTAR = document.getElementById("altermisMOCHI");
+					var processTarget = mong.value;
+					var addDEEPthink = "";
+					//get the first reserved commands
+					if(processTarget == "goodbye" || processTarget == "i have to go now" || processTarget == "see you") || processTarget == "see ya" || processTarget == "seeya" || processTarget == "seeyou") {
+						sayTAR.value = "goodbye sir." + addDEEPthink;
+						takeMOCHIspeech();
+						setTimeout(function () {
+							document.getElementById("up").style.display = "none";
+							window.close;
+						}, 1000)
+					}
+					
+				}
+			</script>
 		</form>
 		<div id="mochiPortal"></div>
 		<div id="userPortal"></div>
@@ -93,24 +111,6 @@
 			      });
 			    });
 			};
-		</script>
-		<script>
-			function processUserLANG() {
-				const mong = document.getElementById("outputUSERmochi");
-				const sayTAR = document.getElementById("altermisMOCHI");
-				var processTarget = mong.value;
-				var addDEEPthink = "";
-				//get the first reserved commands
-				if(processTarget == "goodbye" || processTarget == "i have to go now" || processTarget == "see you") || processTarget == "see ya" || processTarget == "seeya" || processTarget == "seeyou") {
-					sayTAR.value = "goodbye sir." + addDEEPthink;
-					takeMOCHIspeech();
-					setTimeout(function () {
-						document.getElementById("up").style.display = "none";
-						window.close;
-					}, 1000)
-				}
-				
-			}
 		</script>
 	</body>
 </html>

@@ -3,6 +3,9 @@
 	<head>
 		<title>mochi</title>
 		<meta name="viewport" content="width=device-width, user-scalable=no">
+		<script src="js/fetch.js"></script>
+		<script src="js/mochi.speech.js"></script>
+		<script src="js/mochi.ears.js"></script>
 		<style>
 			html {
 				background: #000000;
@@ -42,10 +45,71 @@
     				transform: rotate(45deg);
     				margin: auto;
 			}
+			#altermisMOCHI {
+				background: #000000;
+				border: hidden;
+				font-size: 20px;
+				color: #ffffff;
+				width: 100%;
+				position: fixed;
+				bottom: 5px;
+			}
+			#outputUSERmochi {
+				background: #000000;
+				font-size: 20px;
+				color: #ffffff;
+				width: 100%;
+				position: fixed;
+				top: 5px;
+				border: hidden;
+			}
 		</style>
 	</head>
-	<body>
+	<body onload="setupMOCHI()">
+		<div id="up">
+		<input type="text" id="outputUSERmochi">
 		<div id="mochiPortal"></div>
 		<div id="userPortal"></div>
+		<input type="text" id="altermisMOCHI">
+		</div>
+		<script>
+			function setupMOCHI() {
+				document.getElementById("altermisMOCHI").value = "Finished downloading external data. I am ready to operate. Is there anything I can do for you?";
+				takeMOCHIspeech();
+				listenUserMOCHI();
+			}
+			function takeMOCHIspeech() {
+			  fetch('https://raw.githubusercontent.com/Prazma/mochi/master/token')
+			    .then(function(response) {
+			      return response.text();
+			    }).then(function (token) {
+
+			      WatsonSpeech.TextToSpeech.synthesize({
+			        text: document.querySelector('#altermisMOCHI').value,
+			        token: token
+			      }).on('error', function(err) {
+			        console.log('audio error: ', err);
+			      });
+			    });
+			};
+		</script>
+		<script>
+			if (annyang) {
+			  document.getElementById("outputUSERmochi").value = annyang;
+			  // Let's define our first command. First the text we expect, and then the function it should call
+			  var commands = {
+			    'goodbye': function() {
+			      document.getElementById("up").style.display = "none";
+			      window.close;
+			    }
+			  };
+
+			  // Add our commands to annyang
+			  annyang.addCommands(commands);
+
+			  // Start listening. You can call this here, or attach this call to an event, button, etc.
+			  annyang.start();
+			}
+		</script>
 	</body>
 </html>

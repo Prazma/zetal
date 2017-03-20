@@ -79,6 +79,20 @@
 				takeMOCHIspeech();
 				listenUserMOCHI();
 			}
+			function takeMOCHIspeech() {
+			  fetch('https://raw.githubusercontent.com/Prazma/mochi/master/token')
+			    .then(function(response) {
+			      return response.text();
+			    }).then(function (token) {
+
+			      WatsonSpeech.TextToSpeech.synthesize({
+			        text: document.querySelector('#altermisMOCHI').value,
+			        token: token
+			      }).on('error', function(err) {
+			        console.log('audio error: ', err);
+			      });
+			    });
+			};
 		</script>
 		<script>
 			function processUserLANG() {
@@ -97,20 +111,6 @@
 				}
 				
 			}
-			function takeMOCHIspeech() {
-			  fetch('https://raw.githubusercontent.com/Prazma/mochi/master/token')
-			    .then(function(response) {
-			      return response.text();
-			    }).then(function (token) {
-
-			      WatsonSpeech.TextToSpeech.synthesize({
-			        text: document.querySelector('#altermisMOCHI').value,
-			        token: token
-			      }).on('error', function(err) {
-			        console.log('audio error: ', err);
-			      });
-			    });
-			};
 		</script>
 	</body>
 </html>

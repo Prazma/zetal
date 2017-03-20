@@ -74,6 +74,13 @@
 		<input type="text" id="altermisMOCHI">
 		</div>
 		<script>
+			function setupMOCHI() {
+				document.getElementById("altermisMOCHI").value = "Finished downloading external data. I am ready to operate. Is there anything I can do for you?";
+				takeMOCHIspeech();
+				listenUserMOCHI();
+			}
+		</script>
+		<script>
 			function processUserLANG() {
 				const mong = document.getElementById("outputUSERmochi");
 				const sayTAR = document.getElementById("altermisMOCHI");
@@ -89,11 +96,6 @@
 					}, 1000)
 				}
 				
-			}
-			function setupMOCHI() {
-				document.getElementById("altermisMOCHI").value = "Finished downloading external data. I am ready to operate. Is there anything I can do for you?";
-				takeMOCHIspeech();
-				listenUserMOCHI();
 			}
 			function takeMOCHIspeech() {
 			  fetch('https://raw.githubusercontent.com/Prazma/mochi/master/token')

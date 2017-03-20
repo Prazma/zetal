@@ -5,7 +5,6 @@
 		<meta name="viewport" content="width=device-width, user-scalable=no">
 		<script src="js/fetch.js"></script>
 		<script src="js/mochi.speech.js"></script>
-		<script src="js/mochi.ears.js"></script>
 		<style>
 			html {
 				background: #000000;
@@ -67,12 +66,30 @@
 	</head>
 	<body onload="setupMOCHI()">
 		<div id="up">
-		<input type="text" id="outputUSERmochi">
+		<form action="JavaScript:processUserLANG()">
+			<input type="text" id="outputUSERmochi">
+		</form>
 		<div id="mochiPortal"></div>
 		<div id="userPortal"></div>
 		<input type="text" id="altermisMOCHI">
 		</div>
 		<script>
+			function processUserLANG() {
+				const mong = document.getElementById("outputUSERmochi");
+				const sayTAR = document.getElementById("altermisMOCHI");
+				var processTarget = mong.value;
+				var addDEEPthink = "";
+				//get the first reserved commands
+				if(processTarget == "goodbye" || processTarget == "i have to go now" || processTarget == "see you") || processTarget == "see ya" || processTarget == "seeya" || processTarget == "seeyou") {
+					sayTAR.value = "goodbye sir." + addDEEPthink;
+					takeMOCHIspeech();
+					setTimeout(function () {
+						document.getElementById("up").style.display = "none";
+						window.close;
+					}, 1000)
+				}
+				
+			}
 			function setupMOCHI() {
 				document.getElementById("altermisMOCHI").value = "Finished downloading external data. I am ready to operate. Is there anything I can do for you?";
 				takeMOCHIspeech();
@@ -92,24 +109,6 @@
 			      });
 			    });
 			};
-		</script>
-		<script>
-			if (annyang) {
-			  document.getElementById("outputUSERmochi").value = annyang;
-			  // Let's define our first command. First the text we expect, and then the function it should call
-			  var commands = {
-			    'goodbye': function() {
-			      document.getElementById("up").style.display = "none";
-			      window.close;
-			    }
-			  };
-
-			  // Add our commands to annyang
-			  annyang.addCommands(commands);
-
-			  // Start listening. You can call this here, or attach this call to an event, button, etc.
-			  annyang.start();
-			}
 		</script>
 	</body>
 </html>

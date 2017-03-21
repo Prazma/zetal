@@ -1,116 +1,41 @@
-<!doctype html>
-<html>
+<!DOCTYPE html>
+<html lang="en">
 	<head>
-		<title>mochi</title>
-		<meta name="viewport" content="width=device-width, user-scalable=no">
-		<script src="js/fetch.js"></script>
-		<script src="js/mochi.speech.js"></script>
-		<style>
-			html {
-				background: #000000;
-			}
-			#mochiPortal {
-				border-style: solid;
-				border-width: 12px;
-				border-radius: 50%;
-				border-color: white;
-				box-shadow: 0px 0px 5px #ffffff;
-				display: block;
-				height: 100px;
-				width: 100px;
-				position: absolute;
-    				top:0;
-    				bottom: 0;
-    				left: 0;
-    				right: 0;
- 	   			margin: auto;
-			}
-			#userPortal {
-				border-style: solid;
-				border-width: 8px;
-				border-radius: 50%;
-				border-color: #16bddc;
-				box-shadow: 0px 0px 5px #16bddc;
-				display: block;
-				height: 100px;
-				width: 100px;
-				position: absolute;
-    				top:0;
-    				bottom: 0;
-    				left: 0;
-    				right: 0;
-				-ms-transform: rotate(45deg);
-    				-webkit-transform: rotate(45deg);
-    				transform: rotate(45deg);
-    				margin: auto;
-			}
-			#altermisMOCHI {
-				background: #000000;
-				border: hidden;
-				font-size: 20px;
-				color: #ffffff;
-				width: 100%;
-				position: fixed;
-				bottom: 5px;
-			}
-			#outputUSERmochi {
-				background: #000000;
-				font-size: 20px;
-				color: #ffffff;
-				width: 100%;
-				position: fixed;
-				top: 5px;
-				border: hidden;
-			}
-		</style>
-	</head>
-	<body onload="setupMOCHI()">
-		<div id="up">
-		<form action="JavaScript:processUserLANG()">
-			<input type="text" id="outputUSERmochi">
-			<script>
-				function processUserLANG() {
-					const mong = document.getElementById("outputUSERmochi");
-					const sayTAR = document.getElementById("altermisMOCHI");
-					var processTarget = mong.value;
-					var addDEEPthink = "";
-					//get the first reserved commands
-					if(processTarget == "goodbye" || processTarget == "i have to go now" || processTarget == "see you") || processTarget == "see ya" || processTarget == "seeya" || processTarget == "seeyou") {
-						sayTAR.value = "goodbye sir." + addDEEPthink;
-						takeMOCHIspeech();
-						setTimeout(function () {
-							document.getElementById("up").style.display = "none";
-							window.close;
-						}, 1000)
-					}
-					
-				}
-			</script>
-		</form>
-		<div id="mochiPortal"></div>
-		<div id="userPortal"></div>
-		<input type="text" id="altermisMOCHI">
-		</div>
-		<script>
-			function setupMOCHI() {
-				document.getElementById("altermisMOCHI").value = "Finished downloading external data. I am ready to operate. Is there anything I can do for you?";
-				takeMOCHIspeech();
-				listenUserMOCHI();
-			}
-			function takeMOCHIspeech() {
-			  fetch('https://raw.githubusercontent.com/Prazma/mochi/master/token')
-			    .then(function(response) {
-			      return response.text();
-			    }).then(function (token) {
-
-			      WatsonSpeech.TextToSpeech.synthesize({
-			        text: document.querySelector('#altermisMOCHI').value,
-			        token: token
-			      }).on('error', function(err) {
-			        console.log('audio error: ', err);
-			      });
-			    });
-			};
-		</script>
-	</body>
-</html>
+		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <title>mochi</title>
+  <link rel="stylesheet" href="./demo_files/style.css">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+</head>
+<body data-gr-c-s-loaded="true">
+<div class="container">
+<section>
+    <button id="button" onclick="listen()">Start Request</button>
+    <button id="stop">Force Stop</button>
+    <div id="output"></div>
+</section>
+<script src="https://raw.githubusercontent.com/Prazma/mochi/master/js/mochi.speech.js"></script>
+<!-- window.fetch pollyfill for IE/Edge & Older Chrome/FireFox -->
+<script src="https://raw.githubusercontent.com/Prazma/mochi/master/js/fetch.js"></script>
+<script>
+function listen() {
+  fetch('https://raw.githubusercontent.com/Prazma/mochi/master/token')
+  .then(function(response) {
+      return response.text();
+  }).then(function (token) {
+    var stream = WatsonSpeech.SpeechToText.recognizeMicrophone({
+        token: token,
+        outputElement: '#output' // CSS selector or DOM Element
+    });
+    stream.on('error', function(err) {
+        console.log(err);
+    });
+    document.querySelector('#stop').onclick = function() {
+      stream.stop();
+    };
+  }).catch(function(error) {
+      console.log(error);
+  });
+};
+</script>
+</div>
+</body></html>

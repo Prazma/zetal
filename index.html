@@ -7,20 +7,33 @@
 		</script>
 	</head>
 	<body>
-		<span><strong>MOCHI : </strong></span><span id="mochiText">--</span>
-		<form action="javascript:init()">
-			<span><strong>USER : </strong></span><input id="userInput" placeholder="Message Here">
-		</form>
 		<script>
-			artyom.say("hello");
+			const docs = document.body;
+			docs.style.fontFamily = "monospace";
+			document.write("MOCHI Proc4 Language Processor");
+			docs.innerHTML += '<div id="programPort"><span><strong>MOCHI : </strong></span><span id="mochiOut">--</span><form action="javascript:init()"><input id="userInp" placeholder="Enter Message" onchange="init()"></form></div>';
+			const port = document.getElementById("programPort");
+			const user = document.getElementById("userInp");
+			port.style.padding = "10px 10px 10px 10px";
+			port.style.marginRight = "auto";
+			port.style.marginLeft = "auto";
+			artyom.say("Waking Up...");
 			function init() {
-				const mochi = document.getElementById("mochiText");
-				const user = document.getElementBYId("userInput");
+				const user = document.getElementById("userInp");
+				const mochi = document.getElementById("mochiOut");
+				var greet = [];
+				greet[1] = {present:"hi", past:"hi", future:"hi" };
+				greet[2] = {present:"hello", past:"hello", future:"hello"};
+				greet[3] = {present:"hey", past:"hey", future: "hey"}
+				greet[4] = {present:"hello", past:"hello", future:"hello"}
+				var self = ["i", "myself", "me"]
+				var inputPer = ["you", "your"];
+				var ask = "please";
+				var nervoAct = 0;
 				var userInp = user.value;
-				var brainMochi = null;
-				var greet = ["hi", "hello" "sup", "yo"];
-				var mochiSelf = ["i", "me", "myself"];
-				var space = " ";
+				if(userInp = null) {
+					mochi.innerHTML = ask;
+				}
 			}
 		</script>
 	</body>

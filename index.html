@@ -8,6 +8,7 @@
 	</head>
 	<body>
 		<script>
+			artyom.say("Waking Up...");
 			const docs = document.body;
 			docs.style.fontFamily = "monospace";
 			document.write("MOCHI Proc4 Language Processor");
@@ -17,8 +18,14 @@
 			port.style.padding = "10px 10px 10px 10px";
 			port.style.marginRight = "auto";
 			port.style.marginLeft = "auto";
-			artyom.say("Waking Up...");
+			var errorType = "speech program";
+			var errorRes = "repeat statements";
+			artyom.say("Loaded elements. I am ready.");
+			setTimeout( function () {
+				artyom.say("I have catched some errors on " + errorType + ". I might " + errorRes);
+			}, 4000)
 			function init() {
+				artyom.say("Please wait for a while. I am thinking.");
 				const user = document.getElementById("userInp");
 				const mochi = document.getElementById("mochiOut");
 				var greet = [];
@@ -32,7 +39,7 @@
 				var nervoAct = 0;
 				var userInp = user.value;
 				if(userInp = null) {
-					mochi.innerHTML = ask;
+					var stateMOCHI = ask;
 				}
 			}
 		</script>

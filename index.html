@@ -28,6 +28,7 @@
 				artyom.say("Please wait for a while. I am thinking.");
 				const user = document.getElementById("userInp");
 				const mochi = document.getElementById("mochiOut");
+				mochi.innerHTML = "please wait for a while i am thinking.";
 				var greet = [];
 				greet[1] = {present:"hi", past:"hi", future:"hi" };
 				greet[2] = {present:"hello", past:"hello", future:"hello"};
@@ -38,6 +39,7 @@
 				var ask = "please";
 				var nervoAct = 0;
 				var userInp = user.value;
+				user.value = "";
 				if(userInp = null) {
 					var stateMOCHI = ask;
 				}
@@ -45,3 +47,4 @@
 		</script>
 	</body>
 </html>
+

@@ -12,39 +12,44 @@
 			const docs = document.body;
 			docs.style.fontFamily = "monospace";
 			document.write("MOCHI Proc4 Language Processor");
-			docs.innerHTML += '<div id="programPort"><span><strong>MOCHI : </strong></span><span id="mochiOut">--</span><form action="javascript:init()"><input id="userInp" placeholder="Enter Message" onchange="init()"></form></div>';
+			docs.innerHTML += '<div id="programPort"><span><strong>MOCHI : </strong></span><span id="mochiOut">--</span><form action="javascript:init()"><input id="userInp" placeholder="Enter Message"></form></div>';
 			const port = document.getElementById("programPort");
 			const user = document.getElementById("userInp");
 			port.style.padding = "10px 10px 10px 10px";
 			port.style.marginRight = "auto";
 			port.style.marginLeft = "auto";
-			var errorType = "speech program";
-			var errorRes = "repeat statements";
 			artyom.say("Loaded elements. I am ready.");
 			setTimeout( function () {
-				artyom.say("I have catched some errors on " + errorType + ". I might " + errorRes);
+				//var errorType = "speech program";
+				//var errorRes = "repeat statements";
+				//artyom.say("I have catched some errors on " + errorType + ". I might " + errorRes);
 			}, 4000)
 			function init() {
 				artyom.say("Please wait for a while. I am thinking.");
 				const user = document.getElementById("userInp");
 				const mochi = document.getElementById("mochiOut");
 				mochi.innerHTML = "please wait for a while i am thinking.";
-				var greet = [];
-				greet[1] = {present:"hi", past:"hi", future:"hi" };
-				greet[2] = {present:"hello", past:"hello", future:"hello"};
-				greet[3] = {present:"hey", past:"hey", future: "hey"}
-				greet[4] = {present:"hello", past:"hello", future:"hello"}
-				var self = ["i", "myself", "me"]
-				var inputPer = ["you", "your"];
-				var ask = "please";
-				var nervoAct = 0;
 				var userInp = user.value;
-				user.value = "";
-				if(userInp = null) {
-					var stateMOCHI = ask;
+				var greetings = new Map();
+				var userPos = new Map();
+				var mochiPos = new Map();
+				greetings.set("hi", "hello", "hey");
+				userPos.set("you", "your");
+				mochiPos.set("i", "me", "mochi");
+				var userWords = userInp.split(" ");
+				alert(userWords);
+				var userLen = userWords.length;
+				alert(userLen);
+				var userCou = 0;
+				var mochiSpeechNet = new Map();
+				for (var i = 0; i < userLen; i++) {
+					var kiosk = userWords[i];
+					if(greetings.has(kiosk) == true) {
+						var statr = Math.floor((Math.random() * greetings.length) + 1);
+						
+					}
 				}
 			}
 		</script>
 	</body>
 </html>
-

@@ -30,25 +30,28 @@
 				const mochi = document.getElementById("mochiOut");
 				mochi.innerHTML = "please wait for a while i am thinking.";
 				var userInp = user.value;
-				var greetings = new Map();
+				var greetings = ["hello", "hey", "hi"];
 				var userPos = new Map();
 				var mochiPos = new Map();
-				greetings.set("hi", "hello", "hey");
 				userPos.set("you", "your");
 				mochiPos.set("i", "me", "mochi");
 				var userWords = userInp.split(" ");
-				alert(userWords);
-				var userLen = userWords.length;
-				alert(userLen);
+				var userLen = userWords.length + 1;
 				var userCou = 0;
-				var mochiSpeechNet = new Map();
+				var mochiSpeechNet = [];
+				var greuse = false;
 				for (var i = 0; i < userLen; i++) {
 					var kiosk = userWords[i];
-					if(greetings.has(kiosk) == true) {
-						var statr = Math.floor((Math.random() * greetings.length) + 1);
-						
+					if(greetings.indexOf(kiosk)>0 && greuse == false) {
+						var statr = Math.floor((Math.random() * greetings.length-1) + 0);
+						artyom.say("the selected number is " + statr);
+						var gretr = greetings[statr];
+						mochiSpeechNet.push(gretr);
+						greuse = true;
 					}
 				}
+				var speechMochiNet = mochiSpeechNet.join(" ");
+				artyom.say(speechMochiNet);
 			}
 		</script>
 	</body>

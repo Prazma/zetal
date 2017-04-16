@@ -68,6 +68,9 @@
 			port.style.marginRight = "auto";
 			port.style.marginLeft = "auto";
 			artyom.say("Loaded elements. I am ready.");
+			setTimeout( function () {
+					port.style.boxShadow = "0px 0px 0px #f1f1f1";
+			}, 3000)
 			function init() {
 				const port = document.getElementById("programPort");
 				port.style.boxShadow = "0px 0px 20px #f1f1f1";
@@ -81,29 +84,56 @@
 				var mochiPos = ["i", "me","mine"];
 				var actions = ["text"]
 				var doonot = ["do", "don't"];
+				var commands = ["play", "code", "say"];
+				var multi = ["and"];
+				var addings = ["by the way", "anyways"]
+				var ask = ["what", "why"]
 				var userWords = userInp.split(" ");
 				var userLen = userWords.length;
 				var userCou = 0;
 				var mochiSpeechNet = [];
 				var greuse = false;
+				var thirdPartyProtocol = false;
+				var rand = Math.floor((Math.random() * addings.length) + 0);
 				if(preuser != userInp){
 					for (var i = 1; i < userLen+1; i++) {
 						var kiosk = userWords[i];
-						if(userLen == 1) {
-							var kiosk = userInp;
-							if(greetings.indexOf(kiosk)>=0) {
-								var statr = Math.floor((Math.random() * greetings.length) + 0);
-								var gretr = greetings[statr];
-								mochiSpeechNet.push(gretr);
-								greuse = true;
-							}
-						}
-						if(greetings.indexOf(kiosk)>=0 && greuse == false) {
+						if(greetings.indexOf(kiosk)>=0||userInp.search(kiosk)>=0 && greuse == false) {
 							var statr = Math.floor((Math.random() * greetings.length) + 0);
 							var gretr = greetings[statr];
 							mochiSpeechNet.push(gretr);
 							greuse = true;
 						}
+						if(commands.indexOf(kiosk)>=0) {
+							if(kiosk == "play" && userLen > 1) {
+								thirdPartyProtocol = true;
+								if(userWords.indexOf("audio")>=0) {
+									if(userInp.search("https://")>=11||userInp.search("file://")>=11||userInp.search("http://")>=11){
+										if(userInp.search("https://")>=11){
+											artyom.say("i have recieved a command about playing an audio.");
+											artyom.say("playing audio...");
+											setTimeout( function () {
+												var playMochiAud = confirm("Play Audio at" + audiolin);
+												if(playMochiAud==true){
+													
+												}else{
+													artyom.say("ask again anytime from now sir.")
+												}
+											}, 2000);
+										}
+									}else{
+										artyom.say("specify the file location for me by url sir.")
+									}
+								}else{
+									mochiSpeechNet.push(kiosk);
+									mochiSpeechNet.push(ask[0]);
+									mochiSpeechNet.push(".");
+								}
+							}
+						}
+					}
+					if(thirdPartyProtocol==true){
+						mochiSpeechNet.push(addings[rand]);
 					}
 					user.value = "";
 					var speechMochiNet = mochiSpeechNet.join(" ");

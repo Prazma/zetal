@@ -96,8 +96,12 @@
 				var thirdPartyProtocol = false;
 				var rand = Math.floor((Math.random() * addings.length) + 0);
 				if(preuser != userInp){
-					for (var i = 1; i < userLen+1; i++) {
-						var kiosk = userWords[i];
+					for (var i = 0; i < userLen; i++) {
+						if(i==1){
+							var kiosk = userWords[0];
+						}else{
+							var kiosk = userWords[i];
+						}
 						if(commands.indexOf(kiosk)>=0) {
 							thirdPartyProtocol = true;
 							if(kiosk == "play" && userLen > 1) {
@@ -126,6 +130,10 @@
 							var gretr = greetings[statr];
 							mochiSpeechNet.push(gretr);
 							greuse = true;
+						}
+						if(greetings.indexOf(kiosk)==-1&&commands.indexOf(kiosk)==-1) {
+							artyom.say("i don't know what " + kiosk + " means sir");
+							artyom.say("searching the internet for " + kiosk);
 						}
 					}
 					if(thirdPartyProtocol==true){

@@ -1,0 +1,10 @@
+# M.O.C.H.I
+An artificial intelligence that learns undefined words by itself when talking to users. Developed for developers. MOCHI can help you code without errors just ask MOCHI to code with you.
+
+***
+
+### Purpose
+M.O.C.H.I is an AI project by **Alpha Company** hosted by **Prazma**. M.O.C.H.I will learn many OS and UI programs to operate tasks. M.O.C.H.I can be used in almost all businesses and households.
+
+### Version
+* The Current Version is : Proc2 BETA

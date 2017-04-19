@@ -8,3 +8,7 @@ M.O.C.H.I is an AI project by **Alpha Company** hosted by **Prazma**. M.O.C.H.I 
 
 ### Version
 * The Current Version is : Proc2 BETA
+
+### Resources
+* [Wikipedia](https://wikipedia.org)
+* [YouTube](https://youtube.com)

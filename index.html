@@ -57,8 +57,8 @@
 			artyom.say("Waking Up...");
 			const docs = document.body;
 			docs.style.fontFamily = "sans-serif";
-			document.write("MOCHI Proc4 Language Processor by TOMO");
-			docs.innerHTML += '<br><br><div id="programPort"><span><strong>MOCHI : </strong></span><span id="mochiOut">--</span><form action="javascript:init()"><input id="userInp" placeholder="Enter Message"></form><div style="display: none;"><span><strong>Memory : </strong><span id="memoryMochi">--</span></div></div>';
+			document.write("Proc2");
+			docs.innerHTML += '<br><br><div id="programPort"><div style="width: 60%; margin-left: auto; margin-right: auto;"><span><strong>MOCHI : </strong></span><span id="mochiOut">--</span></div><form action="javascript:init()"><input id="userInp" placeholder="Enter Message"></form><div style="display: none;"><span><strong>Memory : </strong><span id="memoryMochi">--</span></div></div>';
 			const port = document.getElementById("programPort");
 			setTimeout( function () {
 				port.style.boxShadow = "0px 0px 20px #f1f1f1";
@@ -72,6 +72,18 @@
 					port.style.boxShadow = "0px 0px 0px #f1f1f1";
 			}, 3000)
 			function init() {
+				var conFi = false;
+				var alertFi = false;
+				var learnPort = [];
+				var learnCh = false;
+				var mochiData = {
+					master: "Tomo Yamamoto",
+					user: "unknown",
+					name: "MOCHI",
+					birthday: "3/15/16",
+					food: "Gluten-Free Waffles",
+					version: "mark 2"
+				};
 				const port = document.getElementById("programPort");
 				port.style.boxShadow = "0px 0px 20px #f1f1f1";
 				var preuser = document.getElementById("memoryMochi").innerHTML;
@@ -86,21 +98,25 @@
 				var doonot = ["do", "don't"];
 				var commands = ["play", "code", "say"];
 				var multi = ["and"];
-				var addings = ["by the way", "anyways"]
+				var addings = ["Hi by the way", "Hey anyways"]
 				var ask = ["what", "why"]
 				var userWords = userInp.split(" ");
 				var userLen = userWords.length;
 				var userCou = 0;
-				var mochiSpeechNet = [];
+				var kiosk = "error catching input";
+				var specProc = [];
 				var greuse = false;
 				var thirdPartyProtocol = false;
 				var rand = Math.floor((Math.random() * addings.length) + 0);
 				if(preuser != userInp){
 					for (var i = 0; i < userLen; i++) {
 						if(i==1){
-							var kiosk = userWords[0];
+							kiosk = userWords[0];
+							console.log(kiosk);
+
 						}else{
-							var kiosk = userWords[i];
+							kiosk = userWords[i];
+							console.log(kiosk);
 						}
 						if(commands.indexOf(kiosk)>=0) {
 							thirdPartyProtocol = true;
@@ -108,44 +124,64 @@
 								if(userWords.indexOf("audio")>=0||userWords.indexOf("music")>=0||userWords.indexOf("sound")>=0||userWords.indexOf("beat")>=0||userWords.indexOf("sounds")>=0||userWords.indexOf("beats")>=0) {
 									if(userInp.search("https://")>=11||userInp.search("file://")>=11||userInp.search("http://")>=11){
 										if(userInp.search("https://")>=11){
-											artyom.say("i have recieved a command about playing an audio.");
-											artyom.say("playing audio...");
+											specProc.push("I have recieved a command about playing an audio.");
+											specProc.push("Playing audio...");
 										}
 									}else{
-										artyom.say("specify the file location for me by url sir.");
+										specProc.push("specify the file location for me by url sir.");
 									}
 								}else{
-									mochiSpeechNet.push(kiosk);
-									mochiSpeechNet.push(ask[0]);
-									mochiSpeechNet.push(".");
+									specProc.push(kiosk);
+									specProc.push(ask[0]);
+									specProc.push(".");
 								}
 							}
 							if(kiosk == "code" && userLen > 1) {
-								artyom.say("sir, you have not coded the error catcher for me.")
-								artyom.say("i think it is not a great idea to do this.");
+								specProc.push("sir, you have not coded the error catcher for me.")
+								specProc.push("i think it is not a great idea to do this.");
 							}
 						}
 						if(greetings.indexOf(kiosk)>=0||userInp.search(kiosk)>=0 && greuse == false) {
 							var statr = Math.floor((Math.random() * greetings.length) + 0);
 							var gretr = greetings[statr];
-							mochiSpeechNet.push(gretr);
+							specProc.push(gretr);
 							greuse = true;
 						}
+						console.log(greetings.indexOf(kiosk));
+						console.log(commands.indexOf(kiosk));
+						console.log(greetings.indexOf(kiosk)==-1&&commands.indexOf(kiosk)==-1);
 						if(greetings.indexOf(kiosk)==-1&&commands.indexOf(kiosk)==-1) {
-							artyom.say("i don't know what " + kiosk + " means sir");
-							artyom.say("searching the internet for " + kiosk);
+							learnPort.push(kiosk);
+							if(kiosk !== "error catching input"){
+								learnCh = true;
+								console.log(kiosk);
+							}
 						}
 					}
 					if(thirdPartyProtocol==true){
-						mochiSpeechNet.push(addings[rand]);
+						specProc.push(addings[rand]);
+					}
+					if(learnCh = true) {
+						learnPort.push(".");
+						specProc.push("Could not understand the words");
+						var specLerner = learnPort.join(" ");
+						specProc.push(learnPort);
+						specProc.push("Searching for the words listed.");
+						if(conFi == false&&alertFi == false) {
+							specProc.push("It appears that we are not online and ready.");
+							specProc.push("Provide an internet connection for me to complete this task sir.");
+							alertFi = true;
+						}
+					}else{
+						specProc.push("Understood all words.");
 					}
 					user.value = "";
-					var speechMochiNet = mochiSpeechNet.join(" ");
+					var speechMochiNet = specProc.join(" ");
 					artyom.say(speechMochiNet);
 					mochi.innerHTML = speechMochiNet;
 					document.getElementById("memoryMochi").innerHTML = userInp;
 				} else {
-					artyom.say("you dont have to repeat for me.");
+					specProc.push("you dont have to repeat for me.");
 					mochi.innerHTML = "you dont have to repeat for me.";
 				}
 				setTimeout( function () {

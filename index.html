@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 	<head>
-		<title>ZETAL - An AI powered by servers</title>
+		<title>ZETAL - An AI that thinks and learns by itself.</title>
 		<meta name="viewport" content="width=device-width, user-scalable=no">
 		<style>
 			html {
@@ -74,7 +74,7 @@
 			port.style.padding = "10px 10px 10px 10px";
 			port.style.marginRight = "auto";
 			port.style.marginLeft = "auto";
-			artyom.say("Loaded elements. Zetal is ready.");
+			artyom.say("Loaded elements. I am ready.");
 			setTimeout( function () {
 					port.style.boxShadow = "0px 0px 0px #f1f1f1";
 			}, 3000)
@@ -86,7 +86,7 @@
 				var mochiData = {
 					master: "Tomo Yamamoto",
 					user: "unknown",
-					name: "MOCHI",
+					name: "ZETAL",
 					birthday: "3/15/16",
 					food: "Gluten-Free Waffles",
 					version: "mark II"
@@ -103,7 +103,10 @@
 				var mochiPos = ["i", "me","mine"];
 				var actions = ["text"]
 				var doonot = ["do", "don't"];
-				var commands = ["play", "code", "say", "report", "yes", "beatbox"];
+				var commands = ["play", "code", "say", "report", "yes", "beatbox", "define"];
+				var sugg = ["Whats next?", "How are you doing now?", "Is there anything else I can do for you?"];
+				var posi = ["great", "good", "awesome", "nice", "ok", "yeah", "yea", "yeet"];
+				var posiRes = ["Thats great.", "Ok.", "Nice.", "Great.", ":)", "It looks like you are having a great day so far.", "It is always plesurable to hear your positive responce."];
 				var multi = ["and"];
 				var addings = ["by the way", "anyways"]
 				var ask = ["what", "why"]
@@ -167,12 +170,18 @@
 								specProc.push("As you wish sir.");
 							}
 						}
+						if(posi.indexOf(kiosk)>=0){
+							var statr = Math.floor((Math.random() * posiRes.length) + 0);
+							thirdPartyProtocol = true;
+							specProc.push(posiRes[statr]);
+						}
 						if(greetings.indexOf(kiosk)>=0||userInp.search(kiosk)>=0 && greuse == false) {
-							var statr = Math.floor((Math.random() * greetings.length) + 0);
+							statr = Math.floor((Math.random() * greetings.length) + 0);
 							var gretr = greetings[statr];
 							specProc.push(gretr);
 							greuse = true;
 						}
+						
 						console.log(greetings.indexOf(kiosk));
 						console.log(commands.indexOf(kiosk));
 						console.log(greetings.indexOf(kiosk)==-1&&commands.indexOf(kiosk)==-1);
@@ -188,7 +197,7 @@
 					if(thirdPartyProtocol==true){
 						specProc.push(addings[rand]);
 					}
-					if(learnCh == true) {
+					if(learnCh == true&&thirdPartyProtocol == false) {
 						learnPort.push(".");
 						specProc.push("Could not understand the words");
 						var specLerner = learnPort.join(" ");
@@ -202,6 +211,8 @@
 					}else{
 						specProc.push("sir.");
 					}
+					var deol = Math.floor((Math.random() * sugg.length) + 0);
+					specProc.push(sugg[deol]);
 					user.value = faltyCall;
 					var speechMochiNet = specProc.join(" ");
 					artyom.say(speechMochiNet);

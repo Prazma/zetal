@@ -74,7 +74,7 @@
 			port.style.padding = "10px 10px 10px 10px";
 			port.style.marginRight = "auto";
 			port.style.marginLeft = "auto";
-			artyom.say("Loaded elements. I am ready.");
+			artyom.say("Loaded elements. Zetal is ready.");
 			setTimeout( function () {
 					port.style.boxShadow = "0px 0px 0px #f1f1f1";
 			}, 3000)
@@ -103,10 +103,11 @@
 				var mochiPos = ["i", "me","mine"];
 				var actions = ["text"]
 				var doonot = ["do", "don't"];
-				var commands = ["play", "code", "say", "report", "yes", "beatbox", "define"];
+				var commands = ["play", "code", "say", "report", "yes", "no", "beatbox", "define"];
 				var sugg = ["Whats next?", "How are you doing now?", "Is there anything else I can do for you?"];
 				var posi = ["great", "good", "awesome", "nice", "ok", "yeah", "yea", "yeet"];
 				var posiRes = ["Thats great.", "Ok.", "Nice.", "Great.", ":)", "It looks like you are having a great day so far.", "It is always plesurable to hear your positive responce."];
+				var negRes = ["I will respect your decision.", "Ok sir.", "I will follow your decision."];
 				var multi = ["and"];
 				var addings = ["by the way", "anyways"]
 				var ask = ["what", "why"]
@@ -169,6 +170,10 @@
 							if(kiosk == "yes") {
 								specProc.push("As you wish sir.");
 							}
+							if(kiosk == "no") {
+								var negRand = Math.floor((Math.random() * negRes.length) + 0);
+								specProc.push(negRes[negRand]);
+							}
 						}
 						if(posi.indexOf(kiosk)>=0){
 							var statr = Math.floor((Math.random() * posiRes.length) + 0);
@@ -229,3 +234,4 @@
 		</script>
 	</body>
 </html>
+

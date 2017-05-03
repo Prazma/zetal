@@ -1,4 +1,4 @@
-# M.O.C.H.I
+# Z.E.T.A.L MARK IV
 An artificial intelligence that learns undefined words by itself when talking to users. Developed for developers. MOCHI can help you code without errors just ask MOCHI to code with you.
 
 ***

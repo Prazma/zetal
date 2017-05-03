@@ -84,7 +84,7 @@
 			const docs = document.body;
 			docs.style.fontFamily = "sans-serif";
 			document.write("VERSION IV");
-			docs.innerHTML += '<br><br><div id="programPort"><div style="width: 60%; margin-left: auto; margin-right: auto;"><span><strong>ZETAL : </strong></span><span id="mochiOut">--</span></div><form action="javascript:init()"><input id="userInp" placeholder="Enter Message"></form><div style="display: none;"><span><strong>Memory : </strong><span id="memoryMochi">--</span></div></div>';
+			docs.innerHTML += '<br><br><div id="programPort"><div style="width: 60%; margin-left: auto; margin-right: auto;"><span><strong>ZETAL : </strong></span><span id="mochiOut">--</span></div><form action="javascript:init()"><input id="userInp" placeholder="Enter Message" onkeyup="return forceLower(this);"></form><div style="display: none;"><span><strong>Memory : </strong><span id="memoryMochi">--</span></div></div>';
 			const port = document.getElementById("programPort");
 			setTimeout( function () {
 				port.style.boxShadow = "0px 0px 20px #0898e8";
@@ -123,7 +123,7 @@
 				artyom.say("Lets get working on anything you have left.");
 				artyom.say("Maybe you can tell me any tasks you have for today sir.");
 				artyom.say("If you tell me, I can unlock all features I am capable of.");
-				docs.innerHTML += '<form action="javascript:setTask()" style="text-align: center;"><input id="taskInp" placeholder="Enter Task"></form>';
+				docs.innerHTML += '<form action="javascript:setTask()" style="text-align: center;"><input id="taskInp" placeholder="Enter Task" onkeyup="return forceLower(this);"></form>';
 			}
 			function init() {
 				var conFi = false;
@@ -296,6 +296,9 @@
 				artyom.say("Enabled learning capability mode.");
 				artyom.say("Now I can learn new words.");
 				artyom.say("Now I can also do some suggestions for you.");
+			}
+			function forceLower(strInput){
+				strInput.value=strInput.value.toLowerCase();
 			}
 		</script>
 	</body>

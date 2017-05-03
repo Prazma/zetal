@@ -5,7 +5,7 @@
 		<meta name="viewport" content="width=device-width, user-scalable=no">
 		<style>
 			html {
-				background: #0898e8;
+				background: #252525;
 				color: white;
 			}
 			#programPort {
@@ -27,17 +27,36 @@
 				border-bottom-right-radius: 6px;
 				font-size: 1rem;
 				background: transparent;
-				border-top: 1px solid rgba(255, 255, 255, 0.4);
-				border-left: 1px solid rgba(255, 255, 255, 0.4);
-				border-bottom: 1px solid rgba(255, 255, 255, 0.4);
-				border-right: 1px solid rgba(255, 255, 255, 0.4);
+				border-top: 1px solid #ffffff;
+				border-left: 1px solid #ffffff;
+				border-bottom: 1px solid #ffffff;
+				border-right: 1px solid #ffffff;
 				margin-bottom: 25px;
 				color: #ffffff;
 				padding: 10px 20px;
 				outline: none;
 			}
 			#userInp:focus {
-				border: 1px solid #ffffff;
+				border: 1px solid #0898e8;
+			}
+			#taskInp {
+  				border-top-left-radius: 6px;
+  				border-bottom-left-radius: 6px;
+				border-top-right-radius: 6px;
+				border-bottom-right-radius: 6px;
+				font-size: 1rem;
+				background: transparent;
+				border-top: 1px solid #ffffff;
+				border-left: 1px solid #ffffff;
+				border-bottom: 1px solid #ffffff;
+				border-right: 1px solid #ffffff;
+				margin-bottom: 25px;
+				color: #ffffff;
+				padding: 10px 20px;
+				outline: none;
+			}
+			#taskInp:focus {
+				border: 1px solid #0898e8;
 			}
 			.bottom {
 				position: fixed;
@@ -64,20 +83,48 @@
 			artyom.say("Waking Up...");
 			const docs = document.body;
 			docs.style.fontFamily = "sans-serif";
-			document.write("VERSION III Prototype");
+			document.write("VERSION IV");
 			docs.innerHTML += '<br><br><div id="programPort"><div style="width: 60%; margin-left: auto; margin-right: auto;"><span><strong>ZETAL : </strong></span><span id="mochiOut">--</span></div><form action="javascript:init()"><input id="userInp" placeholder="Enter Message"></form><div style="display: none;"><span><strong>Memory : </strong><span id="memoryMochi">--</span></div></div>';
 			const port = document.getElementById("programPort");
 			setTimeout( function () {
-				port.style.boxShadow = "0px 0px 20px #f1f1f1";
+				port.style.boxShadow = "0px 0px 20px #0898e8";
 			}, 2000)
 			const user = document.getElementById("userInp");
 			port.style.padding = "10px 10px 10px 10px";
 			port.style.marginRight = "auto";
 			port.style.marginLeft = "auto";
-			artyom.say("Loaded elements. Zetal is ready.");
 			setTimeout( function () {
 					port.style.boxShadow = "0px 0px 0px #f1f1f1";
 			}, 3000)
+			var today = new Date()
+			var curHr = today.getHours()
+			if (curHr < 12) {
+				artyom.say('Good morning sir.')
+			} else if (curHr < 18) {
+				artyom.say('Good afternoon sir.')
+			} else {
+				artyom.say('Good evening sir.')
+			}
+			var d = new Date();
+			var weekday = new Array(7);
+			weekday[0] = "Sunday";
+			weekday[1] = "Monday";
+			weekday[2] = "Tuesday";
+			weekday[3] = "Wednesday";
+			weekday[4] = "Thursday";
+			weekday[5] = "Friday";
+			weekday[6] = "Saturday";
+			var n = weekday[d.getDay()];
+			artyom.say("Today is " + n + ".");
+			if(d.getDay() == 0||d.getDay() == 6) {
+				artyom.say("So you don't have school or work today.");
+				artyom.say("Maybe you can tell me which place you go to on the weekdays");
+			} else {
+				artyom.say("Lets get working on anything you have left.");
+				artyom.say("Maybe you can tell me any tasks you have for today sir.");
+				artyom.say("If you tell me, I can unlock all features I am capable of.");
+				docs.innerHTML += '<form action="javascript:setTask()" style="text-align: center;"><input id="taskInp" placeholder="Enter Task"></form>';
+			}
 			function init() {
 				var conFi = false;
 				var alertFi = false;
@@ -96,14 +143,14 @@
 				var preuser = document.getElementById("memoryMochi").innerHTML;
 				const user = document.getElementById("userInp");
 				const mochi = document.getElementById("mochiOut");
-				mochi.innerHTML = "please wait for a while i am thinking.";
+				mochi.innerHTML = "Please enter your task for today first.";
 				var userInp = user.value;
 				var greetings = ["hello", "hey", "hi"];
 				var userPos = ["you","your"];
 				var mochiPos = ["i", "me","mine"];
 				var actions = ["text"]
 				var doonot = ["do", "don't"];
-				var commands = ["play", "code", "say", "report", "yes", "no", "beatbox", "define"];
+				var commands = ["play", "code", "say", "report", "yes", "no", "beatbox", "define", "talk"];
 				var sugg = ["Whats next?", "How are you doing now?", "Is there anything else I can do for you?"];
 				var posi = ["great", "good", "awesome", "nice", "ok", "yeah", "yea", "yeet"];
 				var posiRes = ["Thats great.", "Ok.", "Nice.", "Great.", ":)", "It looks like you are having a great day so far.", "It is always plesurable to hear your positive responce."];
@@ -118,6 +165,7 @@
 				var specProc = [];
 				var greuse = false;
 				var thirdPartyProtocol = false;
+				var vocabilarix = false;
 				var faltyCall = "";
 				var rand = Math.floor((Math.random() * addings.length) + 0);
 				if(preuser != userInp){
@@ -169,10 +217,16 @@
 							}
 							if(kiosk == "yes") {
 								specProc.push("As you wish sir.");
+								decCall = true;
 							}
 							if(kiosk == "no") {
 								var negRand = Math.floor((Math.random() * negRes.length) + 0);
 								specProc.push(negRes[negRand]);
+								decCall = true;
+							}
+							if(kiosk == "talk") {
+								specProc.push("You can tell me to play a media, say something, code, report you about something, or maybe do some beatbox.");
+								specProc.push("Theres so much more you can do with me!");
 							}
 						}
 						if(posi.indexOf(kiosk)>=0){
@@ -193,6 +247,13 @@
 						if(greetings.indexOf(kiosk)==-1&&commands.indexOf(kiosk)==-1) {
 							learnPort.push(kiosk);
 							console.log(kiosk);
+							if(vocab.indexOf(kiosk)==-1) {
+								vocab.push(kiosk);
+							}else {
+								specProc.push("Found the word " + kiosk + " in my knowledge.");
+								specProc.push("I would like to see or hear " + kiosk + ".");
+								vocabilarix = true;
+							}
 							if(kiosk !== "error catching input"){
 								learnCh = true;
 								console.log(kiosk);
@@ -202,22 +263,18 @@
 					if(thirdPartyProtocol==true){
 						specProc.push(addings[rand]);
 					}
-					if(learnCh == true&&thirdPartyProtocol == false) {
+					if(learnCh == true&&thirdPartyProtocol == false&&vocabilarix == false) {
 						learnPort.push(".");
-						specProc.push("Could not understand the words");
+						specProc.push("Learning the words");
 						var specLerner = learnPort.join(" ");
 						specProc.push(learnPort);
-						specProc.push("Searching for the words listed.");
-						if(conFi == false&&alertFi == false) {
-							specProc.push("It appears that we are not online and ready.");
-							specProc.push("Provide an internet connection for me to complete this task.");
-							alertFi = true;
-						}
 					}else{
 						specProc.push("sir.");
 					}
-					var deol = Math.floor((Math.random() * sugg.length) + 0);
-					specProc.push(sugg[deol]);
+					if(decCall==false) {
+						var deol = Math.floor((Math.random() * sugg.length) + 0);
+						specProc.push(sugg[deol]);
+					}
 					user.value = faltyCall;
 					var speechMochiNet = specProc.join(" ");
 					artyom.say(speechMochiNet);
@@ -225,13 +282,21 @@
 					document.getElementById("memoryMochi").innerHTML = userInp;
 				} else {
 					specProc.push("you dont have to repeat for me.");
-					mochi.innerHTML = "you dont have to repeat for me.";
 				}
 				setTimeout( function () {
 					port.style.boxShadow = "0px 0px 0px #f1f1f1";
 				}, 1000)
 			}
+			function setTask() {
+				window.vocab = [];
+				window.decCall = true;
+				window.mitask = document.getElementById("taskInp").value;
+				artyom.say("I have added the task " + mitask + " as yur task for today sir.");
+				document.getElementById("taskInp").style.display = "none";
+				artyom.say("Enabled learning capability mode.");
+				artyom.say("Now I can learn new words.");
+				artyom.say("Now I can also do some suggestions for you.");
+			}
 		</script>
 	</body>
 </html>
-

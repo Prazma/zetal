@@ -150,7 +150,7 @@
 				var mochiPos = ["i", "me","mine"];
 				var actions = ["text"]
 				var doonot = ["do", "don't"];
-				var commands = ["play", "code", "say", "report", "yes", "no", "beatbox", "define", "talk"];
+				var commands = ["play", "code", "say", "report", "yes", "no", "beatbox", "define", "ask", "shutdown"];
 				var sugg = ["Whats next?", "How are you doing now?", "Is there anything else I can do for you?"];
 				var posi = ["great", "good", "awesome", "nice", "ok", "yeah", "yea", "yeet"];
 				var posiRes = ["Thats great.", "Ok.", "Nice.", "Great.", ":)", "It looks like you are having a great day so far.", "It is always plesurable to hear your positive responce."];
@@ -224,9 +224,17 @@
 								specProc.push(negRes[negRand]);
 								decCall = true;
 							}
-							if(kiosk == "talk") {
+							if(kiosk == "ask") {
 								specProc.push("You can tell me to play a media, say something, code, report you about something, or maybe do some beatbox.");
 								specProc.push("Theres so much more you can do with me!");
+							}
+							if(kiosk == "shutdown") {
+								specProc.push("Shutting down...");
+								specProc.push("Goodbye...");
+								setTimeout( function () {
+									window.close();
+								}, 1000)
+								
 							}
 						}
 						if(posi.indexOf(kiosk)>=0){
@@ -289,7 +297,7 @@
 			}
 			function setTask() {
 				window.vocab = [];
-				window.decCall = true;
+				window.decCall = false;
 				window.mitask = document.getElementById("taskInp").value;
 				artyom.say("I have added the task " + mitask + " as yur task for today sir.");
 				document.getElementById("taskInp").style.display = "none";
@@ -303,3 +311,4 @@
 		</script>
 	</body>
 </html>
+

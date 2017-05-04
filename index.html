@@ -163,7 +163,7 @@
 				var mochiPos = ["i", "me","mine"];
 				var actions = ["text"]
 				var doonot = ["do", "don't"];
-				var commands = ["play", "code", "say", "report", "yes", "no", "beatbox", "define", "ask", "shutdown"];
+				var commands = ["play", "code", "say", "report", "yes", "no", "beatbox", "define", "ask", "shutdown", "browser"];
 				var sugg = ["Whats next?", "How are you doing now?", "Is there anything else I can do for you?"];
 				var posi = ["great", "good", "awesome", "nice", "ok", "yeah", "yea", "yeet"];
 				var posiRes = ["Thats great.", "Ok.", "Nice.", "Great.", ":)", "It looks like you are having a great day so far.", "It is always plesurable to hear your positive responce."];
@@ -249,6 +249,11 @@
 								}, 1000)
 								
 							}
+							if(kiosk == "browser") {
+								specProc.push("I will leave that to Friday.");
+								specProc.push("Opening Friday...");
+								window.open("https://prazma.github.io/zetal/friday.html");
+							}
 						}
 						if(posi.indexOf(kiosk)>=0){
 							var statr = Math.floor((Math.random() * posiRes.length) + 0);
@@ -322,7 +327,8 @@
 				strInput.value=strInput.value.toLowerCase();
 			}
 			function opnBrzr() {
-				window.confirm("Browser still on maintenance");
+				document.getElementById("userInp").value = "browser";
+				init();
 			}
 		</script>
 	</body>

@@ -96,7 +96,7 @@
 			artyom.say("Waking Up...");
 			const docs = document.body;
 			docs.style.fontFamily = "sans-serif";
-			document.write("VERSION IV STEALTH MODE");
+			document.write("VERSION V STEALTH MODE");
 			docs.innerHTML += '<br><br><div id="programPort"><div style="width: 60%; margin-left: auto; margin-right: auto;"><span><strong style="color: #ff8000;">ZETAL : </strong></span><span id="mochiOut">--</span></div><form action="javascript:init()"><input id="userInp" placeholder="Enter Message" onkeyup="return forceLower(this);"></form><div style="display: none;"><span><strong>Memory : </strong><span id="memoryMochi">--</span></div></div>';
 			const port = document.getElementById("programPort");
 			setTimeout( function () {
@@ -131,7 +131,9 @@
 			artyom.say("Today is " + n + ".");
 			if(d.getDay() == 0||d.getDay() == 6) {
 				artyom.say("So you don't have school or work today.");
-				artyom.say("Maybe you can tell me which place you go to on the weekdays");
+				artyom.say("Maybe you can tell me which place you go to on the weekdays.");
+				artyom.say("Tell me your task for today sir.");
+				docs.innerHTML += '<form action="javascript:setTask()" style="text-align: center;"><input id="taskInp" placeholder="Enter Task" onkeyup="return forceLower(this);"></form>';
 			} else {
 				artyom.say("Lets get working on anything you have left.");
 				artyom.say("Maybe you can tell me any tasks you have for today sir.");
@@ -332,3 +334,4 @@
 		</script>
 	</body>
 </html>
+

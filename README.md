@@ -13,7 +13,7 @@ An artificial intelligence that learns undefined words by itself when talking to
 Z.E.T.A.L is an AI project by **Alpha Company** hosted by **Prazma**. Z.E.T.A.L will learn many OS and UI programs to operate tasks. Z.E.T.A.L can be used in almost all businesses and households.
 
 ### Version
-* The Current Version is : MARK IV
+* The Current Version is : MARK V
 
 ### Resources
 * [Wikipedia](https://wikipedia.org)
